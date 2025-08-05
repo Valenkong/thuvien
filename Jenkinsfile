@@ -17,15 +17,18 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Đang build project...'
-                // Ví dụ: build bằng Maven
-                bat 'mvn clean install'
+                dir('library-management-master') {
+                    bat 'mvn clean install'
+                }
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Đang chạy test...'
-                bat 'mvn test'
+                dir('library-management-master') {
+                    bat 'mvn test'
+                }
             }
         }
 
