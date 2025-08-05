@@ -1,0 +1,7 @@
+services:
+  php:
+    build: .
+    ...
+  db: # ❌ bỏ phần này
+    image: mysql:5.7
+    ...
