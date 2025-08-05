@@ -2,33 +2,29 @@ pipeline {
     agent any
 
     environment {
-        // Biến môi trường nếu cần
         GIT_BRANCH = "main"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Lấy mã nguồn từ nhánh chỉ định
                 git branch: "${GIT_BRANCH}", url: 'https://github.com/Valenkong/thuvien.git'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                echo 'Đang build project...'
-                dir('library-management-master') {
-                    bat 'mvn clean install'
-                }
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Đang chạy test...'
-                dir('library-management-master') {
-                    bat 'mvn test'
-                }
+                echo 'Chạy test PHP nếu có'
+                // Ví dụ: chạy PHPUnit nếu bạn có thiết lập
+                // bat 'phpunit --configuration phpunit.xml'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                echo 'Chạy SonarQube Scanner cho PHP'
+                // Ví dụ: nếu bạn có Sonar Scanner CLI cài đặt
+                // bat 'sonar-scanner -Dsonar.projectKey=thuvien -Dsonar.sources=.'
             }
         }
 
@@ -37,8 +33,8 @@ pipeline {
                 branch 'main'
             }
             steps {
-                echo 'Triển khai ứng dụng...'
-                // Triển khai nếu cần
+                echo 'Triển khai ứng dụng'
+                // Thêm bước deploy nếu cần
             }
         }
     }
