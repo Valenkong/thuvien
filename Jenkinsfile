@@ -18,14 +18,14 @@ pipeline {
             steps {
                 echo 'Đang build project...'
                 // Ví dụ: build bằng Maven
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Đang chạy test...'
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
